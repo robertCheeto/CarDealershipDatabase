@@ -9,7 +9,13 @@ FROM
    
 -- 2. Find all vehicles for a specific dealership
 SELECT
-	*
+	V.VIN,
+    V.make,
+    V.model,
+    V.mileage,
+    D.name,
+    V.price,
+    V.sold
 FROM
 	vehicles AS V
 JOIN inventory as I ON (I.VIN = V.VIN)
@@ -19,7 +25,10 @@ WHERE D.dealership_id = 1;
 
 -- 3. Find a car by VIN
 SELECT
-	*
+	make,
+    model,
+    mileage,
+    price
 FROM
 	vehicles
 WHERE VIN LIKE '%1%';
@@ -27,7 +36,10 @@ WHERE VIN LIKE '%1%';
 
 -- 4. Find the dealership where a certain car is located, by VIN
 SELECT
-	*
+	V.make,
+    V.model,
+    V.mileage,
+    V.price
 FROM
 	dealerships AS D
 JOIN inventory AS I ON (I.dealership_id = D.dealership_id)
@@ -37,7 +49,7 @@ WHERE V.VIN = 100009;
 
 -- 5. Find all Dealerships that have a certain car type (i.e. Red Ford Mustang)
 SELECT
-	*
+	D.*
 FROM
 	dealerships AS D
 JOIN inventory AS I ON (I.dealership_id = D.dealership_id)
