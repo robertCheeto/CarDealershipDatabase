@@ -5,28 +5,31 @@ CREATE DATABASE cardealershipdatabase;
 USE cardealershipdatabase;
 
 -- Creating the tables for the database
-CREATE TABLE dealerships (dealership_id int AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE dealerships (dealership_id int AUTO_INCREMENT,
 name varchar(50),
 address varchar(50),
-phone varchar(12));
+phone varchar(12),
+PRIMARY KEY (dealership_id));
 
-
-CREATE TABLE vehicles (VIN int PRIMARY KEY,
+CREATE TABLE vehicles (VIN int NOT NULL,
 make varchar(50),
 model varchar(50),
 mileage int,
 price int,
-sold varchar(1));
+sold varchar(1),
+PRIMARY KEY (VIN));
 
 CREATE TABLE inventory (dealership_id int, VIN int,
 FOREIGN KEY (dealership_id) REFERENCES dealerships(dealership_id),
 FOREIGN KEY (VIN) REFERENCES vehicles(VIN));
 
-CREATE TABLE sales_contracts (contract_id int AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE sales_contracts (contract_id int AUTO_INCREMENT,
 contract_date varchar(50),
 contract_signee varchar(50),
 VIN int,
-FOREIGN KEY (VIN) REFERENCES vehicles(VIN));
+FOREIGN KEY (VIN) REFERENCES vehicles(VIN),
+PRIMARY KEY (contract_id));
+
 
 -- Creating/Inserting data into each table
 INSERT INTO dealerships (name, address, phone) VALUES
